@@ -2,12 +2,6 @@ html {
   font-size: 14px;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
@@ -19,4 +13,68 @@ html {
 
 body {
   margin-bottom: 60px;
+}
+
+/* meu codigo */
+
+/* Overall Styles */
+body {
+  background-color: #222; /* Dark charcoal background */
+  color: #ccc; /* Lighter gray text for better readability */
+  min-height: 100%;
+}
+/* Navbar and Links */
+.navbar.navbar-dark .navbar-brand,
+.navbar.navbar-dark .nav-link {
+  color: #ccc; /* Lighter gray for better readability */
+}
+
+
+/* Form Search Input Styling */
+input[type="search"] {
+  background-color: #333;
+  border: 1px solid #444;
+  color: #fff;
+}
+
+input[type="search"]::placeholder {
+  color: #bbb;
+}
+
+/* Footer Link Styling */
+footer a {
+  color: #ff6868; /* Lighter ruby color for contrast */
+  text-decoration: none; /* Removes underline */
+}
+
+footer a:hover {
+  color: #ff5050; /* Brighter ruby on hover */
+}
+
+/* Highlights */
+.nav-link:hover {
+  background-color: #B70909; /* Ruby Brilante for highlights */
+  color: #fff; /* White text for highlights */
+}
+
+.btn-ruby {
+    background-color: #9b111e; /* Um tom de vermelho ruby */
+    border: none; /* Remove a borda padrão */
+    color: white; /* Texto branco */
+    box-shadow: 0 0 8px #ff0000; /* Brilho vermelho ao redor do botão */
+}
+
+.btn-ruby:hover {
+    background-color: #8a0e1b; /* Um tom mais escuro de vermelho ao passar o mouse */
+    box-shadow: 0 0 12px #ff0000; /* Brilho mais intenso ao passar o mouse */
+}
+/* Additional Button Styling */
+.btn-ruby:focus {
+  box-shadow: 0 0 0 0.25rem rgba(255, 0, 0, 0.5); /* Ruby red glow for focus */
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
 }
