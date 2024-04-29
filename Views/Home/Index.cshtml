@@ -1,7 +1,55 @@
-﻿<main class="container mt-3">
+﻿@model IEnumerable<scan.Models.Manga>
+
+<main class="container mt-3">
     <div class="jumbotron">
         <h1>Bem-vindo ao Ironicus Scan!</h1>
         <p class="lead">Explore o vasto mundo dos mangás e manhwas aqui.</p>
-        </p>
+
+    <!-- Novos Lançamentos -->
+    <section id="new-releases">
+        <h2>Novos Lançamentos</h2>
+         <div class="row">
+            @if (Model != null && Model.Any()){
+                @foreach (var manga in Model)
+                {
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img class="card-img-top" src="@manga.ImageUrl" alt="@manga.Title">
+                            <div class="card-body">
+                                <h5 class="card-title">@manga.Title</h5>
+                                <p class="card-text">@manga.Summary</p>
+                                <a href="manga.Link" class="btn btn-primary">Leia Mais</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            } else {
+                <div class="col">
+                    <p>Não há mangás disponíveis no momento.</p>
+                </div>
+            }
+            
+        </div>
+    </section>
+
+    <!-- Categorias Populares -->
+    <section id="popular-categories">
+        <h2>Categorias Populares</h2>
+        <!--<div class="row">
+            foreach (var category in Model.PopularCategories)
+            {
+                <div class="col-md-4">
+                    <a href="category.Link" class="category-link">
+                        <div class="category">
+                            <img src="category.ImageUrl" alt="category.Name">
+                            <h3>category.Name</h3>
+                        </div>
+                    </a>
+                </div>
+            }
+        </div>-->
+    </section>
+</main>
+
     </div>
 </main>
