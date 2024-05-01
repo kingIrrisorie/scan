@@ -2,7 +2,6 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using scan.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Mvc;
 using scan.Context;
 
 namespace scan.Controllers;
@@ -21,7 +20,7 @@ public class HomeController : Controller
     public async Task<IActionResult> Index()
     {
         // Busca os mangás ordenados pela data de postagem, exibindo os mais recentes primeiro
-        var latestMangas = await _context.Mangas.OrderByDescending(m => m.PostDate).ToListAsync();
+        var latestMangas = await _context.Mangas.OrderByDescending(m => m.RealeseDate).ToListAsync();
 
         return View(latestMangas);
     }

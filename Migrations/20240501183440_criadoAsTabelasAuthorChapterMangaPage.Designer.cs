@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using scan.Context;
 
@@ -11,9 +12,11 @@ using scan.Context;
 namespace scan.Migrations
 {
     [DbContext(typeof(IronicusScanContext))]
-    partial class IronicusScanContextModelSnapshot : ModelSnapshot
+    [Migration("20240501183440_criadoAsTabelasAuthorChapterMangaPage")]
+    partial class criadoAsTabelasAuthorChapterMangaPage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,21 +24,6 @@ namespace scan.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("GenderManga", b =>
-                {
-                    b.Property<int>("GendersId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MangasId")
-                        .HasColumnType("int");
-
-                    b.HasKey("GendersId", "MangasId");
-
-                    b.HasIndex("MangasId");
-
-                    b.ToTable("MangaGenero", (string)null);
-                });
 
             modelBuilder.Entity("scan.Models.Author", b =>
                 {
@@ -77,23 +65,6 @@ namespace scan.Migrations
                     b.ToTable("Chapter");
                 });
 
-            modelBuilder.Entity("scan.Models.Gender", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Gender");
-                });
-
             modelBuilder.Entity("scan.Models.Manga", b =>
                 {
                     b.Property<int>("Id")
@@ -102,7 +73,7 @@ namespace scan.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("AuthorId")
+                    b.Property<int>("AuthorId")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -153,21 +124,6 @@ namespace scan.Migrations
                     b.ToTable("Page");
                 });
 
-            modelBuilder.Entity("GenderManga", b =>
-                {
-                    b.HasOne("scan.Models.Gender", null)
-                        .WithMany()
-                        .HasForeignKey("GendersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("scan.Models.Manga", null)
-                        .WithMany()
-                        .HasForeignKey("MangasId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("scan.Models.Chapter", b =>
                 {
                     b.HasOne("scan.Models.Manga", "Manga")
@@ -183,7 +139,9 @@ namespace scan.Migrations
                 {
                     b.HasOne("scan.Models.Author", "Author")
                         .WithMany("Mangas")
-                        .HasForeignKey("AuthorId");
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Author");
                 });
