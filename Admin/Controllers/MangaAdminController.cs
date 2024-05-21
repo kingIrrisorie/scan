@@ -21,14 +21,13 @@ namespace scan.Admin.Controllers
 
         public IActionResult Create()
         {
-            var authors = _context.Authors.ToList();
-            ViewBag.Authors = new SelectList(authors, "Id", "Name");
             return View();
         }
         [HttpPost]
         //[ValidateAntiForgeryToken]
         public IActionResult Create(Manga manga, string NewAuthorName)
         {
+            Manga mangaContext = manga;
             if (!string.IsNullOrEmpty(NewAuthorName))
             {
                 // Check if the new author already exists
@@ -48,18 +47,26 @@ namespace scan.Admin.Controllers
                 }
             }
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                _context.Mangas.Add(manga);
-                _context.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    _context.Mangas.Add(manga);
+                    _context.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                catch (System.Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+               
             }
 
-            // Reload authors if there's a need to return to the form
-            var authors = _context.Authors.ToList();
-            ViewBag.Authors = new SelectList(authors, "Id", "Name", manga.AuthorId);
             return View(manga);
         }
-
+        public IActionResult Update()
+        {
+            return View();
+        }
     }
 }
