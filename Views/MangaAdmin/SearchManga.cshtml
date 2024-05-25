@@ -1,0 +1,29 @@
+@model scan.Models.Manga
+
+<h1>Buscar Mangas</h1>
+
+<div class="form-group">
+    <label for="mangaSearch">Buscar Manga:</label>
+    <input type="text" id="mangaSearch" class="form-control" placeholder="Digite o nome do manga" />
+</div>
+
+<div id="searchResults"></div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#mangaSearch").on("input", function() {
+                var query = $(this).val();
+                $.ajax({
+                    url: '@Url.Action("SearchMangas", "Manga")',
+                    type: 'GET',
+                    data: { searchTerm: query },
+                    success: function(data) {
+                        $("#searchResults").html(data);
+                    }
+                });
+            });
+        });
+    </script>
+}

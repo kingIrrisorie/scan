@@ -62,10 +62,23 @@ namespace scan.Admin.Controllers
                
             }
 
-            return View(manga);
+            return RedirectToAction(nameof(Index));
         }
-        public IActionResult Update()
+        public IActionResult Update(int IdManga)
         {
+            return View(_context.Mangas.Find(IdManga));
+        }
+
+        [HttpPost]
+        public IActionResult Update(Manga manga)
+        {
+            var mangaTemp = _context.Mangas.Find(manga.Id);
+
+            mangaTemp.Title = manga.Title;
+
+
+            _context.Mangas.Update(mangaTemp);
+            _context.SaveChanges();
             return View();
         }
     }
