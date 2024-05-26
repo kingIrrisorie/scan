@@ -30,6 +30,7 @@ namespace scan.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime RealeseDate { get; set; } // Data de postagem do mangá
+        public string? ImageUrl {get; set;}
 
         public ICollection<Chapter> Chapters {get;set;}
         public ICollection<Gender> Genders {get;set;}

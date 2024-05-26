@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using scan.Context;
 
@@ -11,9 +12,11 @@ using scan.Context;
 namespace scan.Migrations
 {
     [DbContext(typeof(IronicusScanContext))]
-    partial class IronicusScanContextModelSnapshot : ModelSnapshot
+    [Migration("20240526040742_adicioneiImagem")]
+    partial class adicioneiImagem
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

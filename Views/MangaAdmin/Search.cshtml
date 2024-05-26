@@ -1,0 +1,25 @@
+@model IEnumerable<scan.Models.Manga>
+@{
+    Layout = "_LayoutAdmin";
+}
+
+<form method="get" asp-action="Search" class="d-flex w-100">
+    <input class="form-control" type="search" name="searchTerm" placeholder="Pesquisar mangás">
+    <button type="submit" class="btn btn-primary">Buscar</button>
+</form>
+
+@if (!Model.Any())
+{
+    <p>Nenhum mangá encontrado.</p>
+}
+else
+{
+    <ul>
+        @foreach (var manga in Model)
+        {
+            <li>
+                <a asp-action="Update" asp-route-id="@manga.Id">@manga.Title</a>
+            </li>
+        }
+    </ul>
+}

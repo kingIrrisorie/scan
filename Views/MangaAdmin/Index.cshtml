@@ -1,5 +1,8 @@
 @model scan.Models.Manga;
-
+@{
+    Layout = "_LayoutAdmin";
+}
 <p>Hello, World!</p>
 <a asp-action="Create" asp-controller="MangaAdmin">Criar</a>
-<a asp-action="SearchManga" asp-controller="Mangas">Editar</a>
+<br>
+<a asp-action="Search" asp-controller="MangaAdmin">Editar</a>

@@ -4,6 +4,7 @@ using scan.Models;
 using Microsoft.EntityFrameworkCore;
 using scan.Context;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using scan.Controllers;
 
 namespace scan.Admin.Controllers
 {
@@ -30,20 +31,17 @@ namespace scan.Admin.Controllers
             Manga mangaContext = manga;
             if (!string.IsNullOrEmpty(NewAuthorName))
             {
-                // Check if the new author already exists
                 var existingAuthor = _context.Authors.FirstOrDefault(a => a.Name == NewAuthorName);
                 if (existingAuthor != null)
                 {
-                    // If the author already exists, use their ID
                     manga.AuthorId = existingAuthor.id;
                 }
                 else
                 {
-                    // If the author doesn't exist, create and add the new author
                     var newAuthor = new Author { Name = NewAuthorName };
                     _context.Authors.Add(newAuthor);
                     _context.SaveChanges();
-                    manga.AuthorId = newAuthor.id; // Set the new author's ID to the manga
+                    manga.AuthorId = newAuthor.id;
                 }
             }
 
@@ -64,18 +62,42 @@ namespace scan.Admin.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        public IActionResult Search(string SearchTerm)
+        {
+            List<Manga> results = _context.Mangas
+                            .Where(m => m.Title
+                            .Contains(SearchTerm))
+                            .ToList();
+            
+            return View(results);
+        }
+
+        [HttpGet]
         public IActionResult Update(int IdManga)
         {
-            return View(_context.Mangas.Find(IdManga));
+            var manga = _context.Mangas.Find(IdManga);
+            if (manga == null)
+            {
+                return BadRequest("Id is required.");
+            }
+
+            return View(manga);
         }
 
         [HttpPost]
         public IActionResult Update(Manga manga)
         {
             var mangaTemp = _context.Mangas.Find(manga.Id);
+            if(mangaTemp == null)
+            {
+                BadRequest("Manga not exist");
+            }
 
             mangaTemp.Title = manga.Title;
-
+            mangaTemp.Description = manga.Description;
+            // bloco de author
+            
 
             _context.Mangas.Update(mangaTemp);
             _context.SaveChanges();
