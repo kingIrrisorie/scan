@@ -1,0 +1,17 @@
+@model IEnumerable<scan.Models.Manga>
+
+<h1>Resultados da Pesquisa</h1>
+
+@if (!Model.Any())
+{
+    <p>Nenhum mangá encontrado.</p>
+}
+else
+{
+    <ul>
+        @foreach (var manga in Model)
+        {
+            <li>@manga.Title</li>
+        }
+    </ul>
+}

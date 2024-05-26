@@ -35,19 +35,19 @@
                 </div>
             </div>
         </nav>
-            <form method="get" class="d-flex w-100">
-            <input class="flex-grow-1" type="search" name="search" placeholder="Pesquisar mangás">
+        <form method="get" asp-controller="Manga" asp-action="SearchResults" class="d-flex w-100">
+            <input class="form-control flex-grow-1" type="search" name="searchTerm" placeholder="Pesquisar mangás">
             <button type="submit" class="btn btn-ruby">Buscar</button>
-            </form>
+        </form>
     </header>
 
     <div class="container">
-        <main role="main" class="pb-3 ">
+        <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="bg-dark text-white mt-4 p-3 text-center  py-3" style="position: fixed; bottom: 0; width: 100%;">
+    <footer class="bg-dark text-white mt-4 p-3 text-center py-3" style="position: fixed; bottom: 0; width: 100%;">
         <div>
             &copy; 2024 - Ironicus Scan - <a asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
