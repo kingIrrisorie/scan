@@ -11,7 +11,7 @@ else
     <ul>
         @foreach (var manga in Model)
         {
-            <li>@manga.Title</li>
+            <li><a href="#">@manga.ImageUrl @manga.Title</a></li>
         }
     </ul>
 }

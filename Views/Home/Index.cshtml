@@ -12,13 +12,12 @@
             @if (Model != null && Model.Any()){
                 @foreach (var manga in Model)
                 {
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">@manga.Title</h5>
-                                <p class="card-text">@manga.Description</p>
-                                <a href="manga.Link" class="btn btn-primary">Leia Mais</a>
-                            </div>
+                    <div class="card" style="width: 18rem;">
+                        <img src="@manga.ImageUrl" class="card-img-top" alt="@manga.Title">
+                        <div class="card-body">
+                            <h5 class="card-title">@manga.Title</h5>
+                            <p class="card-text">@manga.Description</p>
+                            <a asp-action="Manga" asp-controller="Manga" asp-route-id="@manga.Id" class="btn btn-primary">Go somewhere</a>
                         </div>
                     </div>
                 }

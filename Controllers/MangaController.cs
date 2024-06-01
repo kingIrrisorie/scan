@@ -18,7 +18,7 @@ namespace scan.Controllers
         [HttpGet]
         public IActionResult SearchResults(string searchTerm)
         {
-            List<Manga> results = new List<Manga>();
+            List<Manga> results = [];
             if (!string.IsNullOrEmpty(searchTerm))
             {
                 results = _context.Mangas
@@ -27,6 +27,13 @@ namespace scan.Controllers
             }
 
             return View(results);
+        }
+
+        [HttpGet]
+        public IActionResult Manga(int IdManga)
+        {
+            var manga = _context.Mangas.Find(IdManga);
+            return View(manga);
         }
     }
 }

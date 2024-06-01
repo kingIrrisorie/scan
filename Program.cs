@@ -40,4 +40,9 @@ app.MapControllerRoute(
     name: "Admin",
     pattern: "{controller=MangaAdmin}/{action=Index}/{id?}");
 
+app.MapControllerRoute(
+    name: "Admin",
+    pattern: "MangaAdmin/Update/{id}",
+    defaults: new {controller = "MangaAdmin", action = "Update"}
+);
 app.Run();

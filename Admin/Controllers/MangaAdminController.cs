@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using scan.Context;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using scan.Controllers;
+using Microsoft.Extensions.FileSystemGlobbing.Internal.PathSegments;
 
 namespace scan.Admin.Controllers
 {
@@ -76,6 +77,7 @@ namespace scan.Admin.Controllers
         [HttpGet]
         public IActionResult Update(int IdManga)
         {
+            Console.WriteLine($"=============\n\n{HttpContext.Request.Path} e o ID é {IdManga}\n\n=============");
             var manga = _context.Mangas.Find(IdManga);
             if (manga == null)
             {
